@@ -1,5 +1,5 @@
 import React from "react"
-import { getByText, render, screen } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import { Screen } from "../Screen"
 

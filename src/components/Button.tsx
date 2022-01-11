@@ -11,12 +11,24 @@ const CalcButton = styled.button<CalcButtonProps>`
     height: 70px;
     color: #373d45;
     transition: 0.3s;
+    background-color: #1795d433;
+    border: 0;
+    cursor: pointer;
+    
     ${({ span2 }) => span2  && css`
         grid-column: 1 / span 2;
     `}
 
+    &:hover {
+        background-color: #1795d466;
+    }
+
     &:active {
         transform: scale(0.9);
+    }
+
+    &:disabled {
+        opacity: 0.6;
     }
 `
 

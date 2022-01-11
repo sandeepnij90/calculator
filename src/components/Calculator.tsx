@@ -4,7 +4,7 @@ import { Button } from "./Button"
 import { Screen } from "./Screen"
 
 const Wrapper = styled.div`
-    height: 500px;
+    height: auto;
     max-width: 320px;
     padding: 20px;
     border-radius: 8px;
@@ -39,21 +39,30 @@ const Calculator:FC = () => {
     }
 
     const updateValue = () => {
+        try {
+            eval(calculation); 
+        } catch (e) {
+            if (e instanceof SyntaxError) {
+                alert(e.message);
+                handleClear()
+            }
+        }
         setValue(eval(calculation))
     }
  
 
-        useEffect(() => {
-        const lastCharacter = calculation.charAt(calculation.length - 1);
-        const isPreviousOperation = lastCharacter === "+"|| lastCharacter === '-' || lastCharacter === '+' || lastCharacter === '*' || lastCharacter === '.' || calculation.length === 0
-        if (isPreviousOperation) {
-            setOperationsDisabled(true)
-        
-        } else {
-            setOperationsDisabled(false)
-        }
+    useEffect(() => {
+    const lastCharacter = calculation.charAt(calculation.length - 1);
+    const isPreviousOperation = lastCharacter === "+"|| lastCharacter === '-' || lastCharacter === '+' || lastCharacter === '*' || lastCharacter === '.' || calculation.length === 0
+    if (isPreviousOperation) {
+        setOperationsDisabled(true)
+    
+    } else {
+        setOperationsDisabled(false)
+    }
 
-        }, [calculation])
+    }, [calculation])
+
     return (
         <Wrapper>
             <Screen value={value} calculation={calculation} />
