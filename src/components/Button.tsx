@@ -26,6 +26,7 @@ interface Props {
     span2?: boolean;
     label?: string;
     onClick: (value: string) => void;
+    disabled?: boolean
 }
 
 export const Button: FC<Props> = ({
@@ -33,6 +34,7 @@ export const Button: FC<Props> = ({
     value,
     span2,
     onClick,
+    disabled
 }) => {
 
     const renderText = () => {
@@ -44,7 +46,7 @@ export const Button: FC<Props> = ({
     }
 
     return (
-        <CalcButton span2={span2} onClick={handleClick}>
+        <CalcButton span2={span2} onClick={handleClick} disabled={disabled}>
             {renderText()}
         </CalcButton>
     )

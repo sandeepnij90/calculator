@@ -17,11 +17,11 @@ test("Should update screen on button click", () => {
 
 test("Should carry out math operations and update value", () => {
     render(<Calculator />)
-    fireEvent.click(screen.getByText("2"));
+    fireEvent.click(screen.getByText("1"));
     fireEvent.click(screen.getByText("+"));
     fireEvent.click(screen.getByText("2"));
     fireEvent.click(screen.getByText("="));
-    expect(screen.getAllByText("4")).toHaveLength(2)
+    expect(screen.getAllByText("3")).toHaveLength(2)
 })
 
 test("Should reset calculations and value on clear button press", () => {
@@ -42,4 +42,18 @@ test("Should clear last character when undo is pressed", () => {
     expect(screen.getAllByText("23")).toHaveLength(1)
     fireEvent.click(screen.getByText("undo"));
     expect(screen.queryByText("23")).not.toBeInTheDocument()
+})
+
+test("Should disabled operations initially", () => {
+    render(<Calculator />)
+    fireEvent.click(screen.getByText("+"));
+    expect(screen.getAllByText("+")).toHaveLength(1)
+    expect(screen.getByText("+")).toBeDisabled()
+})
+
+test("Should disable operations if last input was an operation", () => {
+    render(<Calculator />)
+    fireEvent.click(screen.getByText("1"));
+    fireEvent.click(screen.getByText("+"));
+    expect(screen.getByText("+")).toBeDisabled()
 })
