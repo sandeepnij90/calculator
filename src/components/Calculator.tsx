@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Button } from "./Button"
-
+import { Screen } from "./Screen"
 
 const Wrapper = styled.div`
     height: 500px;
@@ -22,6 +22,7 @@ const Numbers = styled.div`
 const Calculator = () => {
     return (
         <Wrapper>
+            <Screen value={0} calculation="2*2" />
             <Numbers>
                 <Button value="7"/>
                 <Button value="8"/>
