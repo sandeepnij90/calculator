@@ -27,6 +27,16 @@ const Calculator:FC = () => {
         setCalculation(`${calculation}${val}`)
     }
 
+    const handleUndo = () => {
+        const updatedCalculation = calculation.substring(0, calculation.length -1);
+        setCalculation(updatedCalculation)
+    }
+
+    const handleClear = () => {
+        setValue(0)
+        setCalculation("")
+    }
+
     const updateValue = () => {
         setValue(eval(calculation))
     }
@@ -35,19 +45,22 @@ const Calculator:FC = () => {
         <Wrapper>
             <Screen value={value} calculation={calculation} />
             <Numbers>
+                <Button value="" span2 label="clear" onClick={handleClear} />
+                <Button value="" label="undo" onClick={handleUndo} />
+                <Button value="/" onClick={updateCalculation}/>
                 <Button value="7" onClick={updateCalculation}/> 
                 <Button value="8" onClick={updateCalculation}/>
                 <Button value="9" onClick={updateCalculation}/>
-                <Button value="/" onClick={updateCalculation}/>
+                <Button value="*" label="X" onClick={updateCalculation}/>
                 <Button value="4" onClick={updateCalculation}/>
                 <Button value="5" onClick={updateCalculation}/>
                 <Button value="6" onClick={updateCalculation}/>
-                <Button value="*" label="X" onClick={updateCalculation}/>
+                <Button value="-"  onClick={updateCalculation}/>
                 <Button value="1" onClick={updateCalculation}/>
                 <Button value="2" onClick={updateCalculation}/>
                 <Button value="3" onClick={updateCalculation}/>
-                <Button value="-" onClick={updateCalculation}/>
-                <Button value="0" isZero onClick={updateCalculation}/>
+                <Button value="+" onClick={updateCalculation}/>
+                <Button value="0" span2 onClick={updateCalculation}/>
                 <Button value="." onClick={updateCalculation}/>
                 <Button value="=" onClick={updateValue}/>
             </Numbers>

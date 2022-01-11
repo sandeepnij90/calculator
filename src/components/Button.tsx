@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 interface CalcButtonProps {
     onClick: (value: string) => void;
-    isZero: boolean;
+    span2: boolean;
 }
 
 const CalcButton = styled.button<CalcButtonProps>`
@@ -11,7 +11,7 @@ const CalcButton = styled.button<CalcButtonProps>`
     height: 70px;
     color: #373d45;
     transition: 0.3s;
-    ${({ isZero}) => isZero && css`
+    ${({ span2 }) => span2  && css`
         grid-column: 1 / span 2;
     `}
 
@@ -20,9 +20,10 @@ const CalcButton = styled.button<CalcButtonProps>`
     }
 `
 
+
 interface Props {
     value: string;
-    isZero?: boolean;
+    span2?: boolean;
     label?: string;
     onClick: (value: string) => void;
 }
@@ -30,8 +31,8 @@ interface Props {
 export const Button: FC<Props> = ({
     label,
     value,
-    isZero,
-    onClick
+    span2,
+    onClick,
 }) => {
 
     const renderText = () => {
@@ -43,7 +44,7 @@ export const Button: FC<Props> = ({
     }
 
     return (
-        <CalcButton isZero={isZero} onClick={handleClick}>
+        <CalcButton span2={span2} onClick={handleClick}>
             {renderText()}
         </CalcButton>
     )
