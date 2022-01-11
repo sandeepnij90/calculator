@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC, useState} from "react"
 import styled from "styled-components"
 import { Button } from "./Button"
 import { Screen } from "./Screen"
@@ -19,30 +19,39 @@ const Numbers = styled.div`
     gap: 8px;
 `
 
-const Calculator = () => {
+const Calculator:FC = () => {
+    const [calculation, setCalculation] = useState("")
+    const [value, setValue] = useState(0)
+
+    const updateCalculation = (val: string) => {
+        setCalculation(`${calculation}${val}`)
+    }
+
+    const updateValue = () => {
+        setValue(eval(calculation))
+    }
+ 
     return (
         <Wrapper>
-            <Screen value={0} calculation="2*2" />
+            <Screen value={value} calculation={calculation} />
             <Numbers>
-                <Button value="7"/>
-                <Button value="8"/>
-                <Button value="9"/>
-                <Button value="/"/>
-                <Button value="4"/>
-                <Button value="5"/>
-                <Button value="6"/>
-                <Button value="*" label="X"/>
-                <Button value="1"/>
-                <Button value="2"/>
-                <Button value="3"/>
-                <Button value="-"/>
-                <Button value="0" isZero/>
-                <Button value="."/>
-                <Button value="="/>
+                <Button value="7" onClick={updateCalculation}/> 
+                <Button value="8" onClick={updateCalculation}/>
+                <Button value="9" onClick={updateCalculation}/>
+                <Button value="/" onClick={updateCalculation}/>
+                <Button value="4" onClick={updateCalculation}/>
+                <Button value="5" onClick={updateCalculation}/>
+                <Button value="6" onClick={updateCalculation}/>
+                <Button value="*" label="X" onClick={updateCalculation}/>
+                <Button value="1" onClick={updateCalculation}/>
+                <Button value="2" onClick={updateCalculation}/>
+                <Button value="3" onClick={updateCalculation}/>
+                <Button value="-" onClick={updateCalculation}/>
+                <Button value="0" isZero onClick={updateCalculation}/>
+                <Button value="." onClick={updateCalculation}/>
+                <Button value="=" onClick={updateValue}/>
             </Numbers>
         </Wrapper>
-
-
     )
 }
 

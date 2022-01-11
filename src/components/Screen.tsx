@@ -30,7 +30,6 @@ const Value = styled.h3`
     font-family: Arial, Helvetica, sans-serif;
     color: #FFFFFF;
     margin: 0;
-
 `
 
 interface Props {

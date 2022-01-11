@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import styled, { css } from "styled-components";
 
 interface CalcButtonProps {
+    onClick: (value: string) => void;
     isZero: boolean;
 }
 
@@ -22,21 +23,27 @@ const CalcButton = styled.button<CalcButtonProps>`
 interface Props {
     value: string;
     isZero?: boolean;
-    label?: string
+    label?: string;
+    onClick: (value: string) => void;
 }
 
 export const Button: FC<Props> = ({
     label,
     value,
-    isZero
+    isZero,
+    onClick
 }) => {
 
     const renderText = () => {
         return label ? label : value
     }
 
+    const handleClick = () => {
+        onClick(value)
+    }
+
     return (
-        <CalcButton isZero={isZero}>
+        <CalcButton isZero={isZero} onClick={handleClick}>
             {renderText()}
         </CalcButton>
     )
