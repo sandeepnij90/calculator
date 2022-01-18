@@ -1,8 +1,11 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-
 import { Calculator } from '../Calculator'
+import { handlePercent } from '../handlePercent'
+
+jest.mock('../handlePercent')
+const mockHandlePercent = jest.mocked(handlePercent)
 
 test('Should have default value of 0', () => {
   render(<Calculator />)
@@ -56,4 +59,14 @@ test('Should disable operations if last input was an operation', () => {
   fireEvent.click(screen.getByText('1'))
   fireEvent.click(screen.getByText('+'))
   expect(screen.getByText('+')).toBeDisabled()
+})
+
+test('Should convert percentage into decimal', () => {
+  mockHandlePercent.mockReturnValue(0.5)
+  render(<Calculator />)
+  fireEvent.click(screen.getByText('5', { selector: 'button' }))
+  fireEvent.click(screen.getByText('0', { selector: 'button' }))
+  fireEvent.click(screen.getByText('%', { selector: 'button' }))
+  expect(mockHandlePercent).toBeCalledWith('50')
+  expect(screen.getByText('0.5')).toBeInTheDocument()
 })

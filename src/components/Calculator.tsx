@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Button } from './Button'
 import { Screen } from './Screen'
+import { handlePercent } from './handlePercent'
 
 const Wrapper = styled.div`
   height: auto;
@@ -36,6 +37,17 @@ const Calculator: FC = () => {
   const handleClear = () => {
     setValue(0)
     setCalculation('')
+  }
+
+  const onPercent = () => {
+    const isOperator = /(\+|-|\*|\/)/
+    const splitCalucation = calculation.split(isOperator)
+    const percentage = handlePercent(
+      splitCalucation[splitCalucation.length - 1]
+    )
+    splitCalucation.pop()
+    const updatedCalculation = [...splitCalucation, percentage]
+    setCalculation(updatedCalculation.join(''))
   }
 
   const updateValue = () => {
@@ -109,6 +121,7 @@ const Calculator: FC = () => {
           onClick={updateCalculation}
         />
         <Button value="=" disabled={operationsDisabled} onClick={updateValue} />
+        <Button value="%" onClick={onPercent} />
       </Numbers>
     </Wrapper>
   )
